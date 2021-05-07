@@ -3,6 +3,12 @@
     "type": "project",
     "description": "The Laravel Framework.",
     "keywords": ["framework", "laravel"],
+    "repositories": [
+        {
+            "type": "path",
+            "url": "/Users/mac/Documents/projects/hostvile/lms-modullo/modules/*",
+            "symlink": true
+        }],
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
@@ -10,7 +16,9 @@
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
-        "laravel/tinker": "^2.5"
+        "laravel/tinker": "^2.5",
+        "laravel/ui": "^3.2",
+        "lms/modules-lms-learning-base": "@dev"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
