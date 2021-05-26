@@ -6,7 +6,7 @@
 
 
 @section('body_content_main')
-    @include('modules-lms-base::navigation')
+    @include('modules-lms-base::navigation',['type' => 'learner'])
     <div>
 {{--        <h3 class="text-h4 text-blue-light mb-4">My Profile</h3>--}}
         <div class="rounded-md row" style="min-height:100vh">

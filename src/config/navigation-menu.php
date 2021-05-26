@@ -10,16 +10,16 @@ return [
         'navbar' => true,
         'visibility' => false,
         'sub-menu' => [
-            'product' => [
+            'settings' => [
                 'icon' => 'fa fa-home',
                 'dashboard' => 'all',
-                'title' => 'Password',
-                'route' => 'password',
+                'title' => 'Profile',
+                'route' => 'settings',
                 'clickable' => true,
                 'navbar' => true,
             ],
 
         ],
 //        'sub-menu-display' => 'hide'
-    ]
+    ],
 ];

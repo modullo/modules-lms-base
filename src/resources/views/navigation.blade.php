@@ -1,15 +1,27 @@
 @php
     $config = [
-    'quizzes' => [
-        'product',
+    'course-mgt' => [
+        'lesson',
+        'modules',
+        'course',
+    ],
+    'program-mgt' =>  [
+        'create',
+        'programs',
+    ],
+    'resources' => [
+        'asset',
+        'quiz',
     ],
     'courses' =>  [
-        'market',
-        'product',
-        'school',
+        'my-courses',
+        'courses',
+    ],
+    'programs' =>  [
+        'programs',
     ],
     'settings' =>  [
-        'product',
+        'settings',
     ],
 ];
 
@@ -17,7 +29,12 @@
     switch ($type) {
         case 'learner':
             $nav['settings']['visibility'] = true;
-            $nav['courses']['visibility'] = false;
+            $nav['courses']['visibility'] = true;
+            $nav['programs']['visibility'] = true;
+            break;
+        case 'tenant':
+            $nav['resources']['visibility'] = true;
+            $nav['course-mgt']['visibility'] = true;
             break;
     }
 @endphp
@@ -49,22 +66,26 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light py-3 border-top border-bottom">
     <ul class="navbar-nav">
         @foreach($config as $key => $menu)
-            <li class="nav-item {{ count($nav[$key]['sub-menu']) > 0 ? 'dropdown': '' }}">
-                <a class="nav-link {{ count($nav[$key]['sub-menu']) > 0 ? 'dropdown-toggle': '' }}" href="#" data-toggle="dropdown">
+{{--            {{ json_encode($nav[$key]['visibility']) }}--}}
+            @if($nav[$key]['visibility'])
+            <li class="nav-item {{ count($nav[$key]['sub-menu']) > 0 ? 'dropdown': '' }} ">
+                <a class="nav-link {{ count($nav[$key]['sub-menu']) > 0 ? 'dropdown-toggle': '' }}" href="/{{ $nav[$key]['route'] }}" data-toggle="dropdown">
                     {{--                    {{ json_encode($nav) }}--}}
-                    {{ $nav[$key]['title'] }} {{ $nav[$key]['visibility'] }}
+                    <i class="{{ $nav[$key]['icon'] }}"> </i>
+                    {{ $nav[$key]['title'] }}
                 </a>
                 @if(count($nav[$key]['sub-menu']) > 0)
 
                     <div class="dropdown-menu">
                         @foreach($menu as $sub)
                             @if(isset( $nav[$key]['sub-menu'][$sub]))
-                            <a class="dropdown-item" href="#">{{ $nav[$key]['sub-menu'][$sub]['title'] }}</a>
+                            <a class="dropdown-item" href="/{{ $nav[$key]['sub-menu'][$sub]['route'] }}">{{ $nav[$key]['sub-menu'][$sub]['title'] }}</a>
                             @endif
                         @endforeach
                     </div>
                 @endif
             </li>
+            @endif
         @endforeach
     </ul>
 </nav>
