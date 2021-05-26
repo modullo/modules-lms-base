@@ -35,6 +35,7 @@
         case 'tenant':
             $nav['resources']['visibility'] = true;
             $nav['course-mgt']['visibility'] = true;
+            $nav['program-mgt']['visibility'] = true;
             break;
     }
 @endphp
@@ -71,7 +72,7 @@
             <li class="nav-item {{ count($nav[$key]['sub-menu']) > 0 ? 'dropdown': '' }} ">
                 <a class="nav-link {{ count($nav[$key]['sub-menu']) > 0 ? 'dropdown-toggle': '' }}" href="/{{ $nav[$key]['route'] }}" data-toggle="dropdown">
                     {{--                    {{ json_encode($nav) }}--}}
-                    <i class="{{ $nav[$key]['icon'] }}"> </i>
+                    <i class="{{ $nav[$key]['icon'] }} mr-2"> </i>
                     {{ $nav[$key]['title'] }}
                 </a>
                 @if(count($nav[$key]['sub-menu']) > 0)
