@@ -23,9 +23,6 @@
     'settings' =>  [
         'settings',
     ],
-   'grades' =>  [
-        'grades',
-    ],
 ];
 
     $nav = config('navigation-menu');
