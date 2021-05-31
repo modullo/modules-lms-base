@@ -1,5 +1,5 @@
 {
-    "name": "lms/modules-lms-base",
+    "name": "modullo/modules-lms-base",
     "description": "description",
     "type": "library",
     "license": "GPL-3.0-or-later",
@@ -23,13 +23,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Lms\\ModulesLmsBase\\": "src/"
+            "Modullo\\ModulesLmsBase\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Lms\\ModulesLmsBase\\ModulesLmsBaseServiceProvider"
+                "Modullo\\ModulesLmsBase\\ModulesLmsBaseServiceProvider"
             ]
         }
     },

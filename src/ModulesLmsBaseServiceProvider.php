@@ -1,7 +1,6 @@
 <?php
 
-namespace Lms\ModulesLmsBase;
-
+namespace Modullo\ModulesLmsBase;
 use Illuminate\Support\ServiceProvider;
 
 class ModulesLmsBaseServiceProvider extends ServiceProvider

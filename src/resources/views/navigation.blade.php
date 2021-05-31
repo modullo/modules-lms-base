@@ -23,6 +23,9 @@
     'settings' =>  [
         'settings',
     ],
+   'grades' =>  [
+        'grades',
+    ],
 ];
 
     $nav = config('navigation-menu');
@@ -33,6 +36,7 @@
             $nav['programs']['visibility'] = true;
             break;
         case 'tenant':
+            $nav['grades']['visibility'] = true;
             $nav['resources']['visibility'] = true;
             $nav['course-mgt']['visibility'] = true;
             $nav['program-mgt']['visibility'] = true;
@@ -53,11 +57,13 @@
 
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    KEMI ADEJUMO
+                   {{\Illuminate\Support\Facades\Auth::user()->first_name}}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="#">Profile</a>
-                    <a class="dropdown-item" href="#">Logout</a>
+                    <a href="{{route('logout')}}" class="dropdown-item">
+                        Logout
+                    </a>
                 </div>
             </li>
         </ul>

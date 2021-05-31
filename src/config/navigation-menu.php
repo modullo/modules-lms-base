@@ -14,7 +14,7 @@ return [
                 'icon' => 'fa fa-home',
                 'dashboard' => 'all',
                 'title' => 'Profile',
-                'route' => 'settings',
+                'route' => 'learner/profile-settings',
                 'clickable' => true,
                 'navbar' => true,
             ],
