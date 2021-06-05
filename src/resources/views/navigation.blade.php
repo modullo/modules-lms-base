@@ -23,6 +23,15 @@
     'settings' =>  [
         'settings',
     ],
+    'grades-mgt' => [
+        'all-grades',
+    ],
+    'grades' => [
+        'grades',
+    ],
+    'notes' => [
+        'notes',
+    ],
 ];
 
     $nav = config('navigation-menu');
@@ -31,12 +40,15 @@
             $nav['settings']['visibility'] = true;
             $nav['courses']['visibility'] = true;
             $nav['programs']['visibility'] = true;
+            $nav['grades-mgt']['visibility'] = false;
+            $nav['grades']['visibility'] = true;
+            $nav['notes']['visibility'] = true;
             break;
         case 'tenant':
-            $nav['grades']['visibility'] = true;
             $nav['resources']['visibility'] = true;
             $nav['course-mgt']['visibility'] = true;
             $nav['program-mgt']['visibility'] = true;
+            $nav['grades-mgt']['visibility'] = true;
             break;
     }
 @endphp
