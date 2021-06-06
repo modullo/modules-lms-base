@@ -16,6 +16,10 @@ class ModulesLmsBaseServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/resources/views/navigation.blade.php' => resource_path('views/layouts/nav/navigation.blade.php')
         ],'navigation');
+
+        $this->publishes([
+            __DIR__.'/resources/views/breadcrumbs' => resource_path('views/layouts/breadcrumbs')
+        ],'navigation');
     }
 
     public function register()
