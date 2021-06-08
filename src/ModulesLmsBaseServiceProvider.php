@@ -18,8 +18,8 @@ class ModulesLmsBaseServiceProvider extends ServiceProvider
         ],'navigation');
 
         $this->publishes([
-            __DIR__.'/resources/views/breadcrumbs' => resource_path('views/layouts/breadcrumbs')
-        ],'navigation');
+            __DIR__.'/resources/breadcrumbs' => public_path('vendor/breadcrumbs'),
+        ], 'bread-crumbs');
     }
 
     public function register()
