@@ -1,56 +1,18 @@
 @php
-    $config = [
-    'course-mgt' => [
-        'lesson',
-        'modules',
-        'course',
-    ],
-    'program-mgt' =>  [
-        'create',
-        'programs',
-    ],
-    'resources' => [
-        'asset',
-        'quiz',
-    ],
-    'courses' =>  [
-        'my-courses',
-        'courses',
-    ],
-    'programs' =>  [
-        'programs',
-    ],
-    'settings' =>  [
-        'settings',
-    ],
-    'grades-mgt' => [
-        'all-grades',
-    ],
-    'grades' => [
-        'grades',
-    ],
-    'notes' => [
-        'notes',
-    ],
-];
+$original_nav = config('modullo-navigation-menu');
+$viewMode = $type;
+//dd([$original_nav, $viewMode]);
 
-    $nav = config('navigation-menu');
-    switch ($type) {
-        case 'learner':
-            $nav['settings']['visibility'] = true;
-            $nav['courses']['visibility'] = true;
-            $nav['programs']['visibility'] = true;
-            $nav['grades-mgt']['visibility'] = false;
-            $nav['grades']['visibility'] = true;
-            $nav['notes']['visibility'] = true;
-            break;
-        case 'tenant':
-            $nav['resources']['visibility'] = true;
-            $nav['course-mgt']['visibility'] = true;
-            $nav['program-mgt']['visibility'] = true;
-            $nav['grades-mgt']['visibility'] = true;
-            break;
+$final_nav = [];
+
+// GET ACTIVE AND SORT BY ORDERING (LATER)
+foreach($original_nav as $key => $menu) {
+    if (count($menu) > 0) {
+        $nav[$key] = $original_nav[$key];
     }
+}
+//$user_role = Auth::user()->email;
+//dd([$viewMode, $original_nav, $nav]);
 @endphp
 <nav class="navbar navbar-expand-lg navbar-light bg-light py-3">
     <a class="navbar-brand" href="#">{{ config('app.name') }} </a>
@@ -81,27 +43,29 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light py-3 border-top border-bottom">
     <ul class="navbar-nav">
-        @foreach($config as $key => $menu)
-{{--            {{ json_encode($nav[$key]['visibility']) }}--}}
-            @if($nav[$key]['visibility'])
-            <li class="nav-item {{ count($nav[$key]['sub-menu']) > 0 ? 'dropdown': '' }} ">
-                <a class="nav-link {{ count($nav[$key]['sub-menu']) > 0 ? 'dropdown-toggle': '' }}" href="/{{ $nav[$key]['route'] }}" data-toggle="dropdown">
-                    {{--                    {{ json_encode($nav) }}--}}
-                    <i class="{{ $nav[$key]['icon'] }} mr-2"> </i>
-                    {{ $nav[$key]['title'] }}
-                </a>
-                @if(count($nav[$key]['sub-menu']) > 0)
-
-                    <div class="dropdown-menu">
-                        @foreach($menu as $sub)
-                            @if(isset( $nav[$key]['sub-menu'][$sub]))
-                            <a class="dropdown-item" href="/{{ $nav[$key]['sub-menu'][$sub]['route'] }}">{{ $nav[$key]['sub-menu'][$sub]['title'] }}</a>
-                            @endif
-                        @endforeach
-                    </div>
+        @foreach($nav as $NavKey => $NavMenu)
+            @foreach($NavMenu as $key => $menu)
+                @if( $menu['visibility'] && $menu['audience'] == $viewMode)
+                <li class="nav-item {{ count($menu['sub-menu']) > 0 ? 'dropdown': '' }} ">
+                    <a class="nav-link {{ count($menu['sub-menu']) > 0 ? 'dropdown-toggle': '' }}" href="{{ $menu['clickable'] && safe_href_route($menu['route']) ? route($menu['route']) : 'javascript:void(0)' }}" data-toggle="dropdown">
+                        <!--&& (isset($selectedMenu) && $key !== $selectedMenu)-->
+                        <i class="{{ $menu['icon'] }} mr-2"> </i>
+                        {{ $menu['title'] }}
+                    </a>
+                    @if(count($menu['sub-menu']) > 0)
+                        <div class="dropdown-menu">
+                            @foreach($menu['sub-menu'] as $subMenuKey => $subMenuValue)
+                                @if (!empty($subMenuValue['route']) && safe_href_route($subMenuValue['route']) && empty($subMenuValue['link']))
+                                    <a class="dropdown-item" href="{{ safe_href_route($subMenuValue['route']) ? route($subMenuValue['route']) : 'javascript:void(0)' }}"><i class="{{ isset($subMenuValue['icon']) ? $subMenuValue['icon'] : 'fe fe-settings' }}"></i> {!! $subMenuValue['title'] !!}</a>
+                                @elseif (!empty($subMenuValue['link']))
+                                    <a class="dropdown-item" href="{{ $subMenuValue['link'] }}"> {!! $subMenuValue['title'] !!}</a>
+                                @endif
+                            @endforeach
+                        </div>
+                    @endif
+                </li>
                 @endif
-            </li>
-            @endif
+            @endforeach
         @endforeach
     </ul>
 </nav>
