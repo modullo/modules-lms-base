@@ -22,6 +22,10 @@ class ModulesLmsBaseServiceProvider extends ServiceProvider
             __DIR__.'/config/modules-lms-base.php' => config_path('modules-lms-base.php')
         ], 'modullo-modules');
 
+        $this->publishes([
+            __DIR__.'/resources/assets' => public_path('vendor/assets'),
+        ], 'modullo-modules');
+
     }
 
     public function register()

@@ -23,7 +23,17 @@ return [
         'navbar' => true,
         'visibility' => true,
         'order' => 0,
-        'sub-menu' => [],
+        'sub-menu' => [
+            'settings' => [
+                'icon' => 'fa fa-home',
+                'dashboard' => 'all',
+                'title' => 'Profile',
+                'route' => 'learner/profile-settings',
+                'clickable' => true,
+                'navbar' => true,
+            ],
+
+        ],
     ],
     'base-settings' => [
         'audience' => 'learner',
