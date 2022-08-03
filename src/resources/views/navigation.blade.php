@@ -31,10 +31,8 @@ foreach($original_nav as $key => $menu) {
                    {{\Illuminate\Support\Facades\Auth::user()->first_name}}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Profile</a>
-                    <a href="{{route('logout')}}" class="dropdown-item">
-                        Logout
-                    </a>
+                    <a class="dropdown-item" href="{{session('modulloUserRole') === 'lms_tenant' ? route('profile-settings') : route('profile-learner-settings')}}">Profile</a>
+                    <a href="{{route('logout')}}" class="dropdown-item">Logout</a>
                 </div>
             </li>
         </ul>
