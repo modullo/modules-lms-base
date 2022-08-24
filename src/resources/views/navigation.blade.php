@@ -23,7 +23,7 @@ foreach($original_nav as $key => $menu) {
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="{{route('home')}}">Home <span class="sr-only">(current)</span></a>
             </li>
 
             <li class="nav-item dropdown">
@@ -45,7 +45,7 @@ foreach($original_nav as $key => $menu) {
             @foreach($NavMenu as $key => $menu)
                 @if( $menu['visibility'] && $menu['audience'] == $viewMode)
                 <li class="nav-item {{ count($menu['sub-menu']) > 0 ? 'dropdown': '' }} ">
-                    <a class="nav-link {{ count($menu['sub-menu']) > 0 ? 'dropdown-toggle': '' }}" href="{{ $menu['clickable'] && safe_href_route($menu['route']) ? route($menu['route']) : 'javascript:void(0)' }}" data-toggle="dropdown">
+                    <a class="nav-link {{ count($menu['sub-menu']) > 0 ? 'dropdown-toggle': '' }}" href="{{ $menu['clickable'] && safe_href_route($menu['route']) ? route($menu['route']) : 'javascript:void(0)' }}" {!! count($menu['sub-menu']) > 0 ? 'data-toggle="dropdown"': '' !!}>
                         <!--&& (isset($selectedMenu) && $key !== $selectedMenu)-->
                         <i class="{{ $menu['icon'] }} mr-2"> </i>
                         {{ $menu['title'] }}

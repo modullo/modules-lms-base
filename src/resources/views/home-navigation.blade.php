@@ -21,7 +21,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{{route('home')}}">Home <span class="sr-only">(current)</span></a>
                 </li>
 
                 <li class="nav-item dropdown">
@@ -29,6 +29,7 @@
                         {{\Illuminate\Support\Facades\Auth::user()->first_name}}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{auth()->user()->role === 'lms_tenant' ? route('tenant-dashboard') : route('learner-dashboard')}}">Dashboard</a>
                         <a class="dropdown-item" href="#">Profile</a>
                         <a href="{{route('logout')}}" class="dropdown-item">
                             Logout
