@@ -48,32 +48,33 @@
         </div>
     @endif
 </nav>
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light py-3 border-top border-bottom">
-    <ul class="navbar-nav">
-        @foreach($nav as $NavKey => $NavMenu)
-            @foreach($NavMenu as $key => $menu)
-                @if( $menu['visibility'] && $menu['audience'] == $viewMode)
-                    <li class="nav-item {{ count($menu['sub-menu']) > 0 ? 'dropdown': '' }} ">
-                        <a class="nav-link {{ count($menu['sub-menu']) > 0 ? 'dropdown-toggle': '' }}" href="{{ $menu['clickable'] && safe_href_route($menu['route']) ? route($menu['route']) : 'javascript:void(0)' }}" data-toggle="dropdown">
-                            <!--&& (isset($selectedMenu) && $key !== $selectedMenu)-->
-                            <i class="{{ $menu['icon'] }} mr-2"> </i>
-                            {{ $menu['title'] }}
-                        </a>
-                        @if(count($menu['sub-menu']) > 0)
-                            <div class="dropdown-menu">
-                                @foreach($menu['sub-menu'] as $subMenuKey => $subMenuValue)
-                                    @if (!empty($subMenuValue['route']) && safe_href_route($subMenuValue['route']) && empty($subMenuValue['link']))
-                                        <a class="dropdown-item" href="{{ safe_href_route($subMenuValue['route']) ? route($subMenuValue['route']) : 'javascript:void(0)' }}"><i class="{{ isset($subMenuValue['icon']) ? $subMenuValue['icon'] : 'fe fe-settings' }}"></i> {!! $subMenuValue['title'] !!}</a>
-                                    @elseif (!empty($subMenuValue['link']))
-                                        <a class="dropdown-item" href="{{ $subMenuValue['link'] }}"> {!! $subMenuValue['title'] !!}</a>
-                                    @endif
-                                @endforeach
-                            </div>
-                        @endif
-                    </li>
-                @endif
+@if(auth()->check())
+    <nav class="navbar navbar-expand-lg navbar-light bg-light py-3 border-top border-bottom">
+        <ul class="navbar-nav">
+            @foreach($nav as $NavKey => $NavMenu)
+                @foreach($NavMenu as $key => $menu)
+                    @if( $menu['visibility'] && $menu['audience'] == $viewMode)
+                        <li class="nav-item {{ count($menu['sub-menu']) > 0 ? 'dropdown': '' }} ">
+                            <a class="nav-link {{ count($menu['sub-menu']) > 0 ? 'dropdown-toggle': '' }}" href="{{ $menu['clickable'] && safe_href_route($menu['route']) ? route($menu['route']) : 'javascript:void(0)' }}" data-toggle="dropdown">
+                                <!--&& (isset($selectedMenu) && $key !== $selectedMenu)-->
+                                <i class="{{ $menu['icon'] }} mr-2"> </i>
+                                {{ $menu['title'] }}
+                            </a>
+                            @if(count($menu['sub-menu']) > 0)
+                                <div class="dropdown-menu">
+                                    @foreach($menu['sub-menu'] as $subMenuKey => $subMenuValue)
+                                        @if (!empty($subMenuValue['route']) && safe_href_route($subMenuValue['route']) && empty($subMenuValue['link']))
+                                            <a class="dropdown-item" href="{{ safe_href_route($subMenuValue['route']) ? route($subMenuValue['route']) : 'javascript:void(0)' }}"><i class="{{ isset($subMenuValue['icon']) ? $subMenuValue['icon'] : 'fe fe-settings' }}"></i> {!! $subMenuValue['title'] !!}</a>
+                                        @elseif (!empty($subMenuValue['link']))
+                                            <a class="dropdown-item" href="{{ $subMenuValue['link'] }}"> {!! $subMenuValue['title'] !!}</a>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            @endif
+                        </li>
+                    @endif
+                @endforeach
             @endforeach
-        @endforeach
-    </ul>
-</nav>
+        </ul>
+    </nav>
+@endif
